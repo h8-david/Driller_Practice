@@ -7,6 +7,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.LinkedListAccessException;
+import exceptions.NullInsertionException;
 import interfaces.Enumerator;
 import javadriller.DrillingRecord;
 import javadriller.DrillingRecordComparator;
@@ -41,7 +43,7 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testInsert()
 	{
-		assertFalse(linkedList.insert(null));
+		assertThrows(NullInsertionException.class, ()-> linkedList.insert(null));
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record4)); // test first insert
 		assertEquals("00:00:04", linkedList.getFirst().getString(1));
@@ -69,10 +71,10 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testInsertAll()
 	{
-		ArrayList<DrillingRecord> drillingRecords = null;
-		assertFalse(linkedList.insertAll(drillingRecords)); // test null collection
+		final ArrayList<DrillingRecord> nullDrillingRecords = null;
+		assertThrows(NullInsertionException.class, () -> linkedList.insertAll(nullDrillingRecords)); // test null collection
 		//-------------------------------------------------------------------------
-		drillingRecords = new ArrayList<>(5);
+		ArrayList<DrillingRecord> drillingRecords = new ArrayList<>(5);
 		drillingRecords.add(record4);
 		drillingRecords.add(record1);
 		drillingRecords.add(record5);
@@ -85,15 +87,20 @@ class SortedSinglyLinkedListTest {
 		drillingRecords.add(record5);
 		drillingRecords.add(record5);
 		assertFalse(linkedList.insertAll(drillingRecords)); // test collection with non unique elements
+		//-------------------------------------------------------------------------
+		linkedList.clear();
+		drillingRecords.clear();
+		drillingRecords.add(null);
+		assertThrows(NullInsertionException.class, () -> linkedList.insertAll(drillingRecords));
 	}
 	
 	@Test
 	void testRemove()
 	{
-		assertFalse(linkedList.remove(new DrillingRecord())); // remove when first is null
+		assertThrows(LinkedListAccessException.class, () -> linkedList.remove(new DrillingRecord())); // remove when first is null
 		//-------------------------------------------------------------------------
 		testInsert();
-		assertFalse(linkedList.remove(null)); // remove null 
+		assertThrows(LinkedListAccessException.class, () -> linkedList.remove(null)); // remove null 
 		//-------------------------------------------------------------------------
 		assertFalse(linkedList.remove(new DrillingRecord())); // remove non-existent element
 		//-------------------------------------------------------------------------
@@ -143,7 +150,7 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testPullFirst()
 	{
-		assertEquals(null, linkedList.pullFirst());
+		assertThrows(LinkedListAccessException.class, () -> linkedList.pullFirst());
 		testInsert();
 		//-------------------------------------------------------------------------
 		assertEquals(linkedList.getFirst().getString(1), linkedList.pullFirst().getString(1));
@@ -159,17 +166,17 @@ class SortedSinglyLinkedListTest {
 		testInsert();
 		linkedList.clear();
 		assertEquals(0L, linkedList.getSize());
-		assertEquals(null, linkedList.getFirst());
+		assertThrows(LinkedListAccessException.class, () -> linkedList.getFirst());
 	}
 	
 	@Test
 	void testReplace()
 	{
-		assertFalse(linkedList.replace(null));
-		//-------------------------------------------------------------------------
-		assertFalse(linkedList.replace(new DrillingRecord()));
+		assertThrows(LinkedListAccessException.class, () -> linkedList.replace(new DrillingRecord()));
 		//-------------------------------------------------------------------------
 		testInsert();
+		assertThrows(NullInsertionException.class, () -> linkedList.replace(null));
+		//-------------------------------------------------------------------------
 		DrillingRecord replace1 = new DrillingRecord();
 		replace1.setString("00:00:01", 1);
 		replace1.setString("replace1", 0);
@@ -194,9 +201,9 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testContains()
 	{
-		assertFalse(linkedList.contains(new DrillingRecord()));
+		assertThrows(LinkedListAccessException.class, ()-> linkedList.contains(new DrillingRecord()));
 		testInsert();
-		assertFalse(linkedList.contains(null));
+		assertThrows(LinkedListAccessException.class, () -> linkedList.contains(null));
 		assertTrue(linkedList.contains(record1));
 		assertTrue(linkedList.contains(record3));
 		assertTrue(linkedList.contains(record5));
@@ -206,12 +213,12 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testFind()
 	{
-		assertEquals(null, linkedList.find(new DrillingRecord()));
+		assertThrows(LinkedListAccessException.class, () -> linkedList.find(new DrillingRecord()));
 		testInsert();
-		assertEquals(null, linkedList.find(null));
+		assertThrows(LinkedListAccessException.class, ()-> linkedList.find(null));
 		assertEquals(record1, linkedList.find(record1));
 		assertEquals(record3, linkedList.find(record3));
 		assertEquals(record5, linkedList.find(record5));
-		assertEquals(null, linkedList.find(new DrillingRecord()));	
+		assertThrows(LinkedListAccessException.class, () -> linkedList.find(new DrillingRecord()));	
 	}
 }

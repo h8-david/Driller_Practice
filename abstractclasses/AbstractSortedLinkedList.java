@@ -2,6 +2,8 @@ package abstractclasses;
 
 import java.util.Collection;
 
+import exceptions.LinkedListAccessException;
+import exceptions.NullInsertionException;
 import interfaces.Comparator;
 import interfaces.Enumerator;
 import interfaces.SortedLinkedList;
@@ -23,12 +25,14 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean insert(T item);
+	public abstract boolean insert(T item)
+			throws NullInsertionException;
 	
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean insertAll(Collection<? extends T> collection);
+	public abstract boolean insertAll(Collection<? extends T> collection)
+			throws NullInsertionException;
 	
 	/**
 	 * Try to append and element to the linked list
@@ -41,20 +45,25 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean replace(T item);
+	public abstract boolean replace(T item)
+			throws NullInsertionException, LinkedListAccessException;
 	
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean remove(T item);
+	public abstract boolean remove(T item)
+			throws LinkedListAccessException;
 	
 	/**
 	 * see {@code SortedLinkedList}
 	 */
 	@Override
-	public T getFirst()
+	public T getFirst() throws LinkedListAccessException
 	{
-		if(first == null) return null;
+		if(first == null)
+		{
+			throw new LinkedListAccessException();
+		}
 		return first.getData();
 	}
 	
@@ -62,9 +71,12 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	 * see {@code SortedLinkedList}
 	 */
 	@Override
-	public T pullFirst()
+	public T pullFirst() throws LinkedListAccessException
 	{
-		if(first == null) return null;
+		if(first == null)
+		{
+			throw new LinkedListAccessException();
+		}
 		T item = getFirst();
 		removeFirst();
 		return item;
@@ -83,12 +95,14 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean contains(T item);
+	public abstract boolean contains(T item)
+			throws LinkedListAccessException;
 	
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract T find(T item);
+	public abstract T find(T item)
+			throws LinkedListAccessException;
 	
 	/**
 	 * see {@code SortedLinkedList}
