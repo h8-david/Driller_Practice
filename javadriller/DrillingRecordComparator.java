@@ -42,21 +42,15 @@ public class DrillingRecordComparator implements Comparator<DrillingRecord>
 	@Override
 	public int compare(DrillingRecord item1, DrillingRecord item2)
 	{
-		try
+		if(column < 2)
 		{
-			if(column < 2)
-			{
-				return item1.getString(column).compareTo(item2.getString(column));
-			}
-			else
-			{
-				return item1.getNum(column - 2) < item2.getNum(column - 2) ? -1 
-					   : item1.getNum(column - 2) == item2.getNum(column - 2) ? 0 
-					   : 1;
-			}
+			return item1.getString(column).compareTo(item2.getString(column));
 		}
-		catch(Exception e) // this case is impossible
-		{ return 0; }
+		else
+		{
+			return item1.getNum(column - 2) < item2.getNum(column - 2) ? -1 
+				   : item1.getNum(column - 2) == item2.getNum(column - 2) ? 0 
+				   : 1;
+		}
 	}
-
 }
