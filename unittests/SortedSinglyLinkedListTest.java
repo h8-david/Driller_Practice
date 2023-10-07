@@ -41,6 +41,7 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testInsert()
 	{
+		assertFalse(linkedList.insert(null));
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record4)); // test first insert
 		assertEquals("00:00:04", linkedList.getFirst().getString(1));
@@ -91,9 +92,9 @@ class SortedSinglyLinkedListTest {
 	{
 		assertFalse(linkedList.remove(new DrillingRecord())); // remove when first is null
 		//-------------------------------------------------------------------------
+		testInsert();
 		assertFalse(linkedList.remove(null)); // remove null 
 		//-------------------------------------------------------------------------
-		testInsert();
 		assertFalse(linkedList.remove(new DrillingRecord())); // remove non-existent element
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.remove(record1)); // remove first element
@@ -168,20 +169,36 @@ class SortedSinglyLinkedListTest {
 		//-------------------------------------------------------------------------
 		assertFalse(linkedList.replace(new DrillingRecord()));
 		//-------------------------------------------------------------------------
-		linkedList.insert(new DrillingRecord());
-		DrillingRecord replace = new DrillingRecord();
-		replace.addString("replaced");
+		testInsert();
+		DrillingRecord replace1 = new DrillingRecord();
+		replace1.setString("00:00:01", 1);
+		replace1.setString("replace1", 0);
 		//-------------------------------------------------------------------------
-		assertTrue(linkedList.replace(replace));
-		assertEquals("replaced", linkedList.getFirst().getString(0));
-		assertEquals(" ", linkedList.getFirst().getString(1));
-
+		assertTrue(linkedList.replace(replace1));
+		assertEquals("replace1", linkedList.getFirst().getString(0));
+		assertEquals("00:00:01", linkedList.getFirst().getString(1));
+		//-------------------------------------------------------------------------
+		DrillingRecord replace2 = new DrillingRecord();
+		replace2.setString("00:00:03", 1);
+		replace2.setString("replace2", 0);
+		assertTrue(linkedList.replace(replace2));
+		//-------------------------------------------------------------------------
+		DrillingRecord replace3 = new DrillingRecord();
+		replace3.setString("00:00:05", 1);
+		replace3.setString("replace3", 0);
+		assertTrue(linkedList.replace(replace3));
+		//--------------------------------------------------------------------------
+		assertFalse(linkedList.replace(new DrillingRecord()));
 	}
 	
 	@Test
 	void testContains()
 	{
+		assertFalse(linkedList.contains(new DrillingRecord()));
 		testInsert();
+		assertFalse(linkedList.contains(null));
+		assertTrue(linkedList.contains(record1));
+		assertTrue(linkedList.contains(record3));
 		assertTrue(linkedList.contains(record5));
 		assertFalse(linkedList.contains(new DrillingRecord()));	
 	}
@@ -189,7 +206,11 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testFind()
 	{
+		assertEquals(null, linkedList.find(new DrillingRecord()));
 		testInsert();
+		assertEquals(null, linkedList.find(null));
+		assertEquals(record1, linkedList.find(record1));
+		assertEquals(record3, linkedList.find(record3));
 		assertEquals(record5, linkedList.find(record5));
 		assertEquals(null, linkedList.find(new DrillingRecord()));	
 	}
