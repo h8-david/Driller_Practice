@@ -113,7 +113,7 @@ public interface SortedLinkedList<T>
 	 * Get the number of elements of the linked list
 	 * @return the number of elements in the linked list
 	 */
-	long getSize();
+	int getSize();
 	
 	/**
 	 * Create an enumerator for the linked list

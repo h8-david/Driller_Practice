@@ -47,25 +47,25 @@ class SortedSinglyLinkedListTest {
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record4)); // test first insert
 		assertEquals("00:00:04", linkedList.getFirst().getString(1));
-		assertEquals(1L, linkedList.getSize());
+		assertEquals(1, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record1)); // test new first insert
 		assertEquals("00:00:01", linkedList.getFirst().getString(1));
-		assertEquals(2L, linkedList.getSize());
+		assertEquals(2, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record5)); // test append
-		assertEquals(3L, linkedList.getSize());
+		assertEquals(3, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record2)); // test insert in middle
-		assertEquals(4L, linkedList.getSize());
+		assertEquals(4, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		DrillingRecord dupRecord = new DrillingRecord(); // make dup
 		dupRecord.setString("00:00:02", 1);
 		assertFalse(linkedList.insert(dupRecord)); // test duplicate insertion
-		assertEquals(4L, linkedList.getSize());
+		assertEquals(4, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record3)); // add one more for other tests
-		assertEquals(5L, linkedList.getSize());
+		assertEquals(5, linkedList.getSize());
 	}
 	
 	@Test
@@ -105,7 +105,7 @@ class SortedSinglyLinkedListTest {
 		assertFalse(linkedList.remove(new DrillingRecord())); // remove non-existent element
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.remove(record1)); // remove first element
-		assertEquals(4L, linkedList.getSize());
+		assertEquals(4, linkedList.getSize());
 		enumerator = linkedList.enumerator();
 		String[] expectedList = new String[] {"00:00:02", "00:00:03", "00:00:04", "00:00:05"};
 		String[] actualList = new String[(int)linkedList.getSize()];
@@ -119,7 +119,7 @@ class SortedSinglyLinkedListTest {
 		assertTrue(Arrays.equals(expectedList, actualList));
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.remove(record5)); // remove last element
-		assertEquals(3L, linkedList.getSize());
+		assertEquals(3, linkedList.getSize());
 		enumerator = linkedList.enumerator();
 		expectedList = new String[] {"00:00:02", "00:00:03", "00:00:04"};
 		actualList = new String[(int)linkedList.getSize()];
@@ -133,7 +133,7 @@ class SortedSinglyLinkedListTest {
 		assertTrue(Arrays.equals(expectedList, actualList));
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.remove(record3)); // remove middle element
-		assertEquals(2L, linkedList.getSize());
+		assertEquals(2, linkedList.getSize());
 		enumerator = linkedList.enumerator();
 		expectedList = new String[] {"00:00:02", "00:00:04"};
 		actualList = new String[(int)linkedList.getSize()];
@@ -155,7 +155,7 @@ class SortedSinglyLinkedListTest {
 		//-------------------------------------------------------------------------
 		assertEquals(linkedList.getFirst().getString(1), linkedList.pullFirst().getString(1));
 		//-------------------------------------------------------------------------
-		assertEquals(4L, linkedList.getSize());
+		assertEquals(4, linkedList.getSize());
 		//-------------------------------------------------------------------------
 		assertEquals("00:00:02", linkedList.getFirst().getString(1));
 	}
@@ -165,7 +165,7 @@ class SortedSinglyLinkedListTest {
 	{
 		testInsert();
 		linkedList.clear();
-		assertEquals(0L, linkedList.getSize());
+		assertEquals(0, linkedList.getSize());
 		assertThrows(LinkedListAccessException.class, () -> linkedList.getFirst());
 	}
 	

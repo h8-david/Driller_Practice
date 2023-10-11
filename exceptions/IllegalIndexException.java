@@ -6,7 +6,7 @@ package exceptions;
  * @author David
  */
 @SuppressWarnings("serial")
-public class IllegalIndexException extends RuntimeException
+public class IllegalIndexException extends IndexOutOfBoundsException
 {
 	public IllegalIndexException() {}
 	

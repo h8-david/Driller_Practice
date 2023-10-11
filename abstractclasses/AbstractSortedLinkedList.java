@@ -14,7 +14,7 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	protected Comparator<T> comparator;  // comparator that determines the list order and item equality
 	protected Node<T> first;             // pointer to first element of linked list
 	protected Node<T> last;              // pointer to last element of linked list
-	protected long size;                 // number of elements in linked list
+	protected int size;                  // number of elements in linked list
 	
 	// sets the comparator
 	public AbstractSortedLinkedList(Comparator<T> comparator)
@@ -113,7 +113,7 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	 * see {@code SortedLinkedList}
 	 */
 	@Override
-	public long getSize()
+	public int getSize()
 	{
 		return size;
 	}
