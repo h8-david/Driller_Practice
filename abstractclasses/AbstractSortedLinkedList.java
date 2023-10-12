@@ -1,11 +1,7 @@
 package abstractclasses;
 
-import java.util.Collection;
-
 import exceptions.LinkedListAccessException;
-import exceptions.NullInsertionException;
 import interfaces.Comparator;
-import interfaces.Enumerator;
 import interfaces.SortedLinkedList;
 import javadriller.Node;
 
@@ -23,36 +19,12 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	}
 	
 	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract boolean insert(T item)
-			throws NullInsertionException;
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract boolean insertAll(Collection<? extends T> collection)
-			throws NullInsertionException;
-	
-	/**
 	 * Try to append and element to the linked list
 	 * @param item - element to append to linked list
 	 * @return true if element was appended to linked list
 	 * 		   false if element was not appended to linked list
 	 */
 	protected abstract boolean append(T item);
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract boolean replace(T item)
-			throws NullInsertionException, LinkedListAccessException;
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract boolean remove(T item)
-			throws LinkedListAccessException;
 	
 	/**
 	 * see {@code SortedLinkedList}
@@ -95,31 +67,9 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	/**
 	 * see {@code SortedLinkedList}
 	 */
-	public abstract boolean contains(T item)
-			throws LinkedListAccessException;
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract T find(T item)
-			throws LinkedListAccessException;
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract void clear();
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
 	@Override
 	public int getSize()
 	{
 		return size;
 	}
-	
-	/**
-	 * see {@code SortedLinkedList}
-	 */
-	public abstract Enumerator<T> enumerator();
 }
