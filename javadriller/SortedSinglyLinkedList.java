@@ -36,9 +36,8 @@ public class SortedSinglyLinkedList<T> extends AbstractSortedLinkedList<T>
 	}
 
 	@Override
-	protected boolean append(T item) {
+	protected void append(T item) {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -71,7 +70,6 @@ public class SortedSinglyLinkedList<T> extends AbstractSortedLinkedList<T>
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**

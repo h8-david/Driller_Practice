@@ -24,7 +24,7 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	 * @return true if element was appended to linked list
 	 * 		   false if element was not appended to linked list
 	 */
-	protected abstract boolean append(T item);
+	protected abstract void append(T item);
 	
 	/**
 	 * see {@code SortedLinkedList}
@@ -36,7 +36,7 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 		{
 			throw new LinkedListAccessException();
 		}
-		return first.getData();
+		return first.data;
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public abstract class AbstractSortedLinkedList<T> implements SortedLinkedList<T>
 	 */
 	protected boolean removeFirst()
 	{
-		return remove(first.getData());
+		return remove(first.data);
 	}
 	
 	/**
