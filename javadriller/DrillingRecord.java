@@ -36,7 +36,7 @@ public class DrillingRecord
 		{
 			nums[index] = 0.0;
 		}
-		strings[0] = strings[1] = " ";
+		strings[0] = strings[1] = "";
 	}
 
 	/**

@@ -69,9 +69,9 @@ class DrillingRecordTest {
 	void testToString()
 	{
 		StringBuilder drillingRecordBuilder1 = new StringBuilder();
-		drillingRecordBuilder1.append(" ");
+		drillingRecordBuilder1.append("");
 		drillingRecordBuilder1.append(";");
-		drillingRecordBuilder1.append(" ");
+		drillingRecordBuilder1.append("");
 		for(int ctr = 0; ctr < 16; ++ctr)
 		{
 			drillingRecordBuilder1.append(";");
