@@ -3,7 +3,6 @@ import java.util.Collection;
 
 import abstractclasses.AbstractSortedLinkedList;
 import exceptions.LinkedListAccessException;
-import exceptions.NullInsertionException;
 import interfaces.Comparator;
 import interfaces.Enumerator;
 
@@ -24,13 +23,13 @@ public class SortedSinglyLinkedList<T> extends AbstractSortedLinkedList<T>
 	 * hint: break it up, first, last, somewhere in the middle
 	 */
 	@Override
-	public boolean insert(T item) throws NullInsertionException {
+	public boolean insert(T item) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean insertAll(Collection<? extends T> collection) throws NullInsertionException {
+	public boolean insertAll(Collection<? extends T> collection) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -41,7 +40,7 @@ public class SortedSinglyLinkedList<T> extends AbstractSortedLinkedList<T>
 	}
 
 	@Override
-	public boolean replace(T item) throws NullInsertionException, LinkedListAccessException {
+	public boolean replace(T item) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -50,13 +49,13 @@ public class SortedSinglyLinkedList<T> extends AbstractSortedLinkedList<T>
 	 * hint: break it up, first, last, somewhere in the middle
 	 */
 	@Override
-	public boolean remove(T item) throws LinkedListAccessException {
+	public boolean remove(T item) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean contains(T item) throws LinkedListAccessException {
+	public boolean contains(T item) {
 		// TODO Auto-generated method stub
 		return false;
 	}

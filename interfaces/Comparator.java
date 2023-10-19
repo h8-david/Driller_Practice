@@ -7,7 +7,6 @@ package interfaces;
  *
  * @param <T> Object type to compare
  */
-@FunctionalInterface
 public interface Comparator<T>
 {
 	/**

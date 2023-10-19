@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import exceptions.LinkedListAccessException;
-import exceptions.NullInsertionException;
 import interfaces.Enumerator;
 import javadriller.DrillingRecord;
 import javadriller.DrillingRecordComparator;
@@ -45,7 +44,7 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testInsert()
 	{
-		assertThrows(NullInsertionException.class, ()-> linkedList.insert(null)); // tests null insertion
+		assertFalse(linkedList.insert(null)); // tests null insertion
 		//-------------------------------------------------------------------------
 		assertTrue(linkedList.insert(record4)); // tests very first insert
 		assertEquals(1, linkedList.getSize());
@@ -121,7 +120,7 @@ class SortedSinglyLinkedListTest {
 	void testInsertAll()
 	{
 		final ArrayList<DrillingRecord> nullDrillingRecords = null;
-		assertThrows(NullInsertionException.class, () -> linkedList.insertAll(nullDrillingRecords)); // tests null collection insertion
+		assertFalse(linkedList.insertAll(nullDrillingRecords)); // tests null collection insertion
 		//-------------------------------------------------------------------------
 		ArrayList<DrillingRecord> drillingRecords = new ArrayList<>(5); // add all 5 records into a collection
 		drillingRecords.add(record4);
@@ -157,16 +156,16 @@ class SortedSinglyLinkedListTest {
 		drillingRecords.clear(); // reset the arraylist
 		drillingRecords.add(null); // add a null value into the arraylist
 		// try to add a null value into the linkedlist through a collection
-		assertThrows(NullInsertionException.class, () -> linkedList.insertAll(drillingRecords));
+		assertFalse(linkedList.insertAll(drillingRecords));
 	}
 	
 	@Test
 	void testRemove()
 	{
-		assertThrows(LinkedListAccessException.class, () -> linkedList.remove(new DrillingRecord())); // try to remove when first is null
+		assertFalse(linkedList.remove(new DrillingRecord())); // try to remove when first is null
 		//-------------------------------------------------------------------------
 		testInsert(); // adds elements to the list
-		assertThrows(LinkedListAccessException.class, () -> linkedList.remove(null)); // try to remove a null value
+		assertFalse(linkedList.remove(null)); // try to remove a null value
 		//-------------------------------------------------------------------------
 		assertFalse(linkedList.remove(new DrillingRecord())); // try to remove a non-existent element
 		//-------------------------------------------------------------------------
@@ -241,10 +240,10 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testReplace()
 	{
-		assertThrows(LinkedListAccessException.class, () -> linkedList.replace(new DrillingRecord())); // try to replace when list is empty
+		assertFalse(linkedList.replace(new DrillingRecord())); // try to replace when list is empty
 		//-------------------------------------------------------------------------
 		testInsert(); // adds elements to the linkedlist
-		assertThrows(NullInsertionException.class, () -> linkedList.replace(null)); // try to replace with a null item
+		assertFalse(linkedList.replace(null)); // try to replace with a null item
 		//-------------------------------------------------------------------------
 		DrillingRecord replace1 = new DrillingRecord(); // make a drillingrecord for replacing
 		replace1.setString("00:00:01", 1);
@@ -288,9 +287,9 @@ class SortedSinglyLinkedListTest {
 	@Test
 	void testContains()
 	{
-		assertThrows(LinkedListAccessException.class, ()-> linkedList.contains(new DrillingRecord())); // tries contains on empty list
+		assertFalse(linkedList.contains(new DrillingRecord())); // tries contains on empty list
 		testInsert(); // adds elements to the linkedlist
-		assertThrows(LinkedListAccessException.class, () -> linkedList.contains(null)); // tries contains with null data
+		assertFalse(linkedList.contains(null)); // tries contains with null data
 		assertTrue(linkedList.contains(record1));
 		assertTrue(linkedList.contains(record3));
 		assertTrue(linkedList.contains(record5));
